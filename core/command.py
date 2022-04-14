@@ -1,6 +1,6 @@
 import requests
 import json
-from core.urls import Bld, Cmd, baseurl
+from krx_api.core.urls import Bld, Cmd, baseurl
     
 class WrongStockCode(Exception):
     pass
@@ -32,7 +32,6 @@ class ApiCommand:
     
 
   def ticker(self, code:str)->Ticker:
-    print(Cmd.JSON)
     url = baseurl+Cmd.JSON
     payload = {  
       'locale' : self._locale,
@@ -41,7 +40,7 @@ class ApiCommand:
       'searchText' : code
     }
     
-    res = requests.get(url, data=payload)
+    res = requests.get(url, params=payload)
     try:
         data = json.loads(res.text)['block1']
     except:
@@ -69,7 +68,7 @@ class ApiCommand:
         'strtDd': start,
         'endDd': end,
     }
-    res = requests.get(url, data=payload)
+    res = requests.get(url, params=payload)
     try:
         data = json.loads(res.text)['output']
     except:
@@ -106,7 +105,7 @@ class ApiCommand:
       'endDd': end,
       }
 
-    res = requests.get(url, data=payload)
+    res = requests.get(url, params=payload)
     try:
         data = json.loads(res.text)['output']
     except:
@@ -122,8 +121,9 @@ class ApiCommand:
     }
 
     res = requests.get(url, params=query)
+    print(res.text)
     try:
-      data = json.loads(res.text)['result']['output']['bis_work_dt']
+      data = json.loads(res.text)['result']['output'][0]['bis_work_dt']
     except:
         raise ConnectionError
     return data

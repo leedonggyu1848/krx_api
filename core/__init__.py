@@ -1,4 +1,4 @@
-from command import (
+from krx_api.core.command import (
   Ticker,
   ApiCommand
 )

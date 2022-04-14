@@ -1,12 +1,12 @@
-from enum import Enum
+from krx_api.util.constants import Constants
 
 baseurl = 'http://data.krx.co.kr/comm/bldAttendant/'
 
-class Cmd(Enum):
+class Cmd(Constants):
   JSON = 'getJsonData.cmd'
   RESOURCE = 'executeForResourceBundle.cmd'
 
-class Bld(Enum):
+class Bld(Constants):
   TICKER = 'dbms/comm/finder/finder_stkisu'
   INVESTOR_ACTIVITIES_ACC = 'dbms/MDC/STAT/standard/MDCSTAT02301'
   INVESTOR_ACTIVITIES_EACHDAY = 'dbms/MDC/STAT/standard/MDCSTAT02303'
